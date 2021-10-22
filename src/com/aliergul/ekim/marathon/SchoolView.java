@@ -128,10 +128,12 @@ public class SchoolView {
 	private void viewListCurrentSallary() {
 		ConsoleHelper.printTitle(globalStrings.getString("Globalization.CURRENT_SALARY_LIST"), 30);
 		listWorker.forEach(p -> {
-			System.out.printf("%-8s: %s: %s: %-30s %s : %.02f %s : %.02f %n", "SicilNo", p.getRegistrationNumber(),
-					"İsim", p.getName().toString(), "Başlangıç Maaşı", p.getSalary(), "Güncel Maaşı",
+			System.out.printf("%-8s: %s: %s: %-30s %s : %s %s : %.02f %n", "SicilNo", p.getRegistrationNumber(), "İsim",
+					p.getName().toString(), "Başlangıç Tarihi", p.getStartDate(), "Güncel Maaşı",
 					p.getCurrentSallary());
 		});
+		
+		ConsoleHelper.readString("Ana Menü İçin Bir Tuşa seçip entere Basınız.");
 	}
 	
 	/**
@@ -145,7 +147,9 @@ public class SchoolView {
 		List<Worker> giftList = listWorker.stream().filter(w -> w.isthereGiftthisMounth() != null)
 				.collect(Collectors.toList());
 		if (giftList != null && giftList.size() > 0) {
-			giftList.forEach(System.out::println);
+			giftList.forEach(p -> {
+				System.out.println(p.isthereGiftthisMounth());
+			});
 		}
 	}
 	

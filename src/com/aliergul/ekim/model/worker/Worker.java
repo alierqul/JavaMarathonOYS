@@ -55,9 +55,11 @@ public class Worker extends Person implements IWorkerProcess, Serializable {
 	
 	@Override
 	public String isthereGiftthisMounth() {
-		String msjBirthDay = this.getName() + " Doğum Günü Bu Ayın " + this.getBirthDay().getDayOfMonth()
-				+ this.getName() + " İşe Başlama Tarihi Bu ayın  " + this.getStartDate().getDayOfMonth();
-		String msjStarDate = this.getName() + " İşe Başlama Tarihi Bu ayın  " + this.getStartDate().getDayOfMonth();
+		String msjBirthDay = String.format("[İsim = %-25s] Doğum Günü Bu Ayın         %2d .Günü ", this.getName(),
+				this.getBirthDay().getDayOfMonth());
+		
+		String msjStarDate = String.format("[İsim = %-25s] İşe Başlama Tarihi Bu Ayın %2d .Günü ", this.getName(),
+				this.getStartDate().getDayOfMonth());
 		LocalDate now = LocalDate.now();
 		boolean isStartThisMounth = now.getMonth() == this.startDate.getMonth() && this.finishDate == null;
 		boolean isBirthThisMounth = now.getMonth() == this.getBirthDay().getMonth() && this.finishDate == null;
@@ -80,8 +82,8 @@ public class Worker extends Person implements IWorkerProcess, Serializable {
 	public double getCurrentSallary() {
 		LocalDate now = LocalDate.now();
 		double cuurentSalary = this.getSalary();
-		long daysInvoice = (this.startDate.until(now, ChronoUnit.YEARS) * 2);
-		for (int i = 1; i <= daysInvoice; i++) {
+		int mounthCount = (int) Math.floor(this.startDate.until(now, ChronoUnit.MONTHS) / 6);
+		for (int i = 1; i <= mounthCount; i++) {
 			if (this instanceof Teacher) {
 				cuurentSalary = cuurentSalary * 1.10;
 			} else if (this instanceof Servant) {
