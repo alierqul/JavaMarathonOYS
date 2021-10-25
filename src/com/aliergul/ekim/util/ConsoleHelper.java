@@ -158,7 +158,7 @@ public class ConsoleHelper {
 			try {
 				LocalDate date = StringHelper.stringToLocalDate(secim);
 				return date;
-			} catch (IllegalArgumentException e) {
+			} catch (ParseException e) {
 				System.out.println("HATA: " + e.getMessage());
 				scan.nextLine();
 			}

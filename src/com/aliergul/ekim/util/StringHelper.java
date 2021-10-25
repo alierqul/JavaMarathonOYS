@@ -33,12 +33,18 @@ public class StringHelper {
 		return date;
 	}
 	
-	public static LocalDate stringToLocalDate(String strDate) {
-		
-		DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_PATTERN);
+	public static LocalDate stringToLocalDate(String strDate) throws ParseException {
 		LocalDate date = LocalDate.now();
-		date = LocalDate.parse(strDate.trim(), format);
-		return date;
+		try {
+			DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_PATTERN);
+			date = LocalDate.parse(strDate.trim(), format);
+			return date;
+		} catch (Exception e) {
+			date = null;
+			throw new ParseException("Hatalı Tarih Formatı\ndd.MM.yyyy Şeklinde Girilmeli", 0);
+			
+		}
+		
 	}
 	
 	public static EGender stringToEgender(String gender) {
@@ -51,7 +57,7 @@ public class StringHelper {
 			case "KADIN", "K", "KA":
 				return EGender.KADIN;
 			default:
-				throw new IllegalArgumentException("Hatalı Cinsiyet Girdiniz.");
+				throw new IllegalArgumentException("Hatalı Cinsiyet Girdiniz.[Erkek / Kadın]");
 			
 		}
 		
@@ -67,7 +73,7 @@ public class StringHelper {
 			case "boşanmış", "bo":
 				return EMarriageStatus.BOSANMIS;
 			default:
-				throw new IllegalArgumentException("Hatalı Evlilik durumu Girdiniz.");
+				throw new IllegalArgumentException("Hatalı Evlilik durumu Girdiniz.[Evli / Bekar / Boşanmış]");
 			
 		}
 		

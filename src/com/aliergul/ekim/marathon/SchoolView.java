@@ -292,8 +292,8 @@ public class SchoolView {
 	
 	private Student addNewStudent() {
 		Name name = addNewName();
-		EGender gender = ConsoleHelper.readEGender("Cinsiyetiniz: ");
-		LocalDate birthday = ConsoleHelper.readLocalDate("Doğum Tarihiniz: ");
+		EGender gender = ConsoleHelper.readEGender("Cinsiyetiniz[Erkek / Kadın]: ");
+		LocalDate birthday = ConsoleHelper.readLocalDate("Doğum Tarihiniz[dd.MM.yyyy]: ");
 		String[] phone = new String[3];
 		phone[0] = (ConsoleHelper.readString("1.Telefon Giriniz:"));
 		phone[1] = (ConsoleHelper.readString("2.Telefon Giriniz:"));
@@ -301,7 +301,7 @@ public class SchoolView {
 		do {
 			
 			try {
-				EMarriageStatus marriageStatus = ConsoleHelper.readEMarriageStatus("Medeni Durumu:");
+				EMarriageStatus marriageStatus = ConsoleHelper.readEMarriageStatus("Medeni Durumu[Bekar]:");
 				return new Student(name, gender, birthday, marriageStatus, phone);
 			} catch (ExceptionMarriageStatus e) {
 				System.out.println("HATA: " + e.getMessage() + "\nTekrar Deneyiniz.");
@@ -486,7 +486,7 @@ public class SchoolView {
 		do {
 			Map<String, Object> map = ArraysHelper.searchWorker(listWorker);
 			if (map != null) {
-				LocalDate date = ConsoleHelper.readLocalDate("Çıkış Tarihini Giriniz.");
+				LocalDate date = ConsoleHelper.readLocalDate("Çıkış Tarihini Giriniz[dd.MM.yyyy].");
 				int index = (int) map.get(ArraysHelper.INDEX);
 				listWorker.get(index).setFinishDate(date);
 				if (FileIOHelper.writeDosyaya(listWorker, FileIOHelper.PATH_WORKER)) {
@@ -520,10 +520,11 @@ public class SchoolView {
 	 */
 	private Worker addNewWoker() {
 		Name name = addNewName();
-		EGender gender = ConsoleHelper.readEGender("Cinsiyetiniz: ");
-		LocalDate birthDay = ConsoleHelper.readLocalDate("Doğum Tarihiniz: ");
-		EMarriageStatus marriageStatus = ConsoleHelper.readEMarriageStatus("Evlilik Durumunuz: ");
-		LocalDate startDate = ConsoleHelper.readLocalDate("İşe Başlama Tarihi:");
+		EGender gender = ConsoleHelper.readEGender("Cinsiyetiniz [E/K]: ");
+		LocalDate birthDay = ConsoleHelper.readLocalDate("Doğum Tarihiniz[dd.MM.yyyy]: ");
+		EMarriageStatus marriageStatus = ConsoleHelper
+				.readEMarriageStatus("Evlilik Durumunuz:[Evli / Boşanmış / Bekar] ");
+		LocalDate startDate = ConsoleHelper.readLocalDate("İşe Başlama Tarihi[dd.MM.yyyy]:");
 		double salary = ConsoleHelper.readDouble("Başlangıç Maaşı:");
 		String[] phone = new String[2];
 		phone[0] = (ConsoleHelper.readString("1.Telefon Giriniz:"));
