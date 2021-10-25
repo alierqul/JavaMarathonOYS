@@ -3,6 +3,7 @@
  */
 package com.aliergul.ekim.util;
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Map;
@@ -76,7 +77,6 @@ public class ConsoleHelper {
 		do {
 			System.out.print(msg);
 			boolean isDigit = true;
-			scan.nextLine();
 			secim = scan.next().trim();
 			for (int i = 0; i < secim.length(); i++) {
 				
@@ -100,7 +100,6 @@ public class ConsoleHelper {
 		do {
 			try {
 				System.out.print(msg);
-				scan.nextLine();
 				secim = scan.next().trim();
 				EGender gender = StringHelper.stringToEgender(secim);
 				return gender;
@@ -118,7 +117,7 @@ public class ConsoleHelper {
 		do {
 			try {
 				System.out.print(msg);
-				scan.nextLine();
+				
 				secim = scan.next().trim();
 				EMarriageStatus gender = StringHelper.stringToEMarriage(secim);
 				return gender;
@@ -140,7 +139,7 @@ public class ConsoleHelper {
 			try {
 				Date date = StringHelper.stringToDate(secim);
 				return date;
-			} catch (IllegalArgumentException e) {
+			} catch (ParseException e) {
 				System.out.println("HATA: " + e.getMessage());
 				scan.nextLine();
 			}

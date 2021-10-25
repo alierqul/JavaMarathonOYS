@@ -17,8 +17,9 @@ public class StringHelper {
 	 * 
 	 * @param birthDay
 	 * @return
+	 * @throws ParseException
 	 */
-	public static Date stringToDate(String strDate) {
+	public static Date stringToDate(String strDate) throws ParseException {
 		
 		SimpleDateFormat format = new SimpleDateFormat(DATE_PATTERN);
 		Date date = new Date();
@@ -26,7 +27,7 @@ public class StringHelper {
 			date = format.parse(strDate.trim());
 		} catch (ParseException e) {
 			date = null;
-			throw new IllegalArgumentException("Hatalı Tarih Formatı\ndd.MM.yyyy Şeklinde Girilmeli");
+			throw new ParseException("Hatalı Tarih Formatı\ndd.MM.yyyy Şeklinde Girilmeli", 0);
 			
 		}
 		return date;

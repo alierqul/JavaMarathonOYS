@@ -21,6 +21,7 @@ import com.aliergul.ekim.model.worker.Teacher;
 import com.aliergul.ekim.model.worker.Worker;
 import com.aliergul.ekim.util.ArraysHelper;
 import com.aliergul.ekim.util.ConsoleHelper;
+import com.aliergul.ekim.util.ExceptionMarriageStatus;
 import com.aliergul.ekim.util.FileIOHelper;
 
 public class SchoolView {
@@ -290,7 +291,6 @@ public class SchoolView {
 	}
 	
 	private Student addNewStudent() {
-		
 		Name name = addNewName();
 		EGender gender = ConsoleHelper.readEGender("Cinsiyetiniz: ");
 		LocalDate birthday = ConsoleHelper.readLocalDate("Doğum Tarihiniz: ");
@@ -298,8 +298,16 @@ public class SchoolView {
 		phone[0] = (ConsoleHelper.readString("1.Telefon Giriniz:"));
 		phone[1] = (ConsoleHelper.readString("2.Telefon Giriniz:"));
 		phone[1] = (ConsoleHelper.readString("3.Telefon Giriniz:"));
-		EMarriageStatus marriageStatus = ConsoleHelper.readEMarriageStatus("Medeni Durumu:");
-		return new Student(name, gender, birthday, marriageStatus, phone);
+		do {
+			
+			try {
+				EMarriageStatus marriageStatus = ConsoleHelper.readEMarriageStatus("Medeni Durumu:");
+				return new Student(name, gender, birthday, marriageStatus, phone);
+			} catch (ExceptionMarriageStatus e) {
+				System.out.println("HATA: " + e.getMessage() + "\nTekrar Deneyiniz.");
+			}
+		} while (true);
+		
 	}
 	
 	// Var Olan Sınıf a Öğrenci Ekleme

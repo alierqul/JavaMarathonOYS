@@ -14,6 +14,7 @@ import com.aliergul.ekim.model.constants.Person;
 import com.aliergul.ekim.model.constants.School;
 import com.aliergul.ekim.model.lessons.ClassRoom;
 import com.aliergul.ekim.model.lessons.Lessons;
+import com.aliergul.ekim.util.ExceptionMarriageStatus;
 
 public class Student extends Person implements Serializable {
 	/**
@@ -28,11 +29,12 @@ public class Student extends Person implements Serializable {
 	private String[] phone = new String[3];
 	private List<Lessons> listLessons;
 	
-	public Student(Name name, EGender gender, LocalDate birthDay, EMarriageStatus statusMarriage, String[] phone) {
+	public Student(Name name, EGender gender, LocalDate birthDay, EMarriageStatus statusMarriage, String[] phone)
+			throws ExceptionMarriageStatus {
 		super(name, gender, birthDay, statusMarriage);
 		
 		if (this.getStatusMarriage() == EMarriageStatus.EVLI) {
-			throw new IllegalArgumentException("Öğrenciler Evli Olamaz.");
+			throw new ExceptionMarriageStatus("Öğrenciler Evli Olamaz.");
 		}
 		if (++countStudent >= 1000 || countStudent <= 0) {
 			countStudent = 1;
