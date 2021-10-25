@@ -56,6 +56,15 @@ public class MenuCreator {
 		return mainMenu;
 	}
 	
+	public Map<Integer, String> menuCreatClastList() {
+		Map<Integer, String> mainMenu = new TreeMap<>();
+		mainMenu.put(1, glaGlobalStrings.getString("Globalization.ALL_CLASS_LIST"));
+		mainMenu.put(2, glaGlobalStrings.getString("Globalization.SEARCH_CLASS"));
+		
+		mainMenu.put(99, glaGlobalStrings.getString("Globalization.EXIT_MAIN"));
+		return mainMenu;
+	}
+	
 	public Map<Integer, String> menuCreatTobeContinued() {
 		Map<Integer, String> mainMenu = new TreeMap<>();
 		mainMenu.put(1, glaGlobalStrings.getString("Globalization.REPEAT") + "02 "

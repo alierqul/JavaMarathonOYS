@@ -66,7 +66,7 @@ public class SchoolView {
 					viewOgrenciAtama();
 					break;
 				case 7:
-					viewClassList();
+					viewALLClassListMenu();
 					break;
 				case 8:
 					viewSelectLessonStudent();
@@ -134,7 +134,7 @@ public class SchoolView {
 					p.getCurrentSallary());
 		});
 		
-		ConsoleHelper.readString("Ana Menü İçin Bir Tuşa seçip entere Basınız.");
+		ConsoleHelper.readString(globalStrings.getString("Globalization.PUSH_A_KEY"));
 	}
 	
 	/**
@@ -236,9 +236,48 @@ public class SchoolView {
 	 *
 	 * Menü 7 Sınıf listesi
 	 */
+	private void viewALLClassListMenu() {
+		
+		int chooseStudent = 0;
+		
+		while ((chooseStudent = ConsoleHelper.showMenu(globalStrings.getString("Globalization.LIST_CLASS"),
+				menuCreator.menuCreatClastList())) != 99) {
+			
+			switch (chooseStudent) {
+				case 1:
+					for (ClassRoom c : listClass) {
+						ConsoleHelper.printLine(10);
+						System.out.println("Sınıf Adı: " + c.getName());
+						System.out.println("Sınıf Öğretmeni: " + c.getTeacher().getName());
+						System.out.println("Sınıf Öğrenci Listesi:");
+						ConsoleHelper.printLine(10);
+						c.getListStudent().forEach(System.out::println);
+						ConsoleHelper.printLine(10);
+					}
+					ConsoleHelper.readString(globalStrings.getString("Globalization.PUSH_A_KEY"));
+					break;
+				case 2:
+					viewClassList();
+					break;
+				case 0:
+					chooseStudent = 99;
+					break;
+				
+			}
+			
+			if (chooseStudent == 99) {
+				break;
+			}
+			
+		}
+		writeFileIO();
+		
+	}
+	
 	private void viewClassList() {
+		
 		do {
-			ConsoleHelper.printTitle(globalStrings.getString("Globalization.LIST_CLASS"), 30);
+			ConsoleHelper.printTitle(globalStrings.getString("Globalization.SEARCH_CLASS"), 30);
 			Map<String, Object> classRoom = ArraysHelper.searchClass(listClass);
 			if (classRoom != null) {
 				ClassRoom val = (ClassRoom) classRoom.get(ArraysHelper.OBJECT);
@@ -417,7 +456,7 @@ public class SchoolView {
 			System.err.println("\nKayıt Yok");
 		}
 		
-		ConsoleHelper.readString("\n\nMenü için [1] e basıp [ENTER] a basınız...");
+		ConsoleHelper.readString(globalStrings.getString("Globalization.PUSH_A_KEY"));
 	}
 	
 	/**
@@ -434,7 +473,7 @@ public class SchoolView {
 			System.out.println("\nKayıt Yok");
 		}
 		
-		ConsoleHelper.readString("\n\nMenü için [1] e basıp [ENTER] a basınız...");
+		ConsoleHelper.readString(globalStrings.getString("Globalization.PUSH_A_KEY"));
 	}
 	
 	/**
