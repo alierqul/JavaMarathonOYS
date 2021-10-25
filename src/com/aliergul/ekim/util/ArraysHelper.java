@@ -19,8 +19,8 @@ public class ArraysHelper {
 	private static Map<Integer, String> menuSearch(String findPerson) {
 		Map<Integer, String> menu = new TreeMap<>();
 		menu.put(1, "Onay [ " + findPerson + " ]");
-		menu.put(2, "Tekrar Dene");
-		menu.put(0, "Çıkış Yap");
+		menu.put(2, "[2] Tekrar Dene\t[0] Çıkış");
+		
 		return menu;
 	}
 	
